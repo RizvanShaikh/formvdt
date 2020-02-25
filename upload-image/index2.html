@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>upload image</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container text-center">	
+<h2>Second Page</h2>
+<div class="container text-center">
+<h2>This is Second Page</h2>
+<!-- Upload  -->
+<!-- <p><img  src="img/butterfly.jpg" id="showImage" width="500" /></p> -->
+
+ <p> <img src="" accept="image/*" id="tableBanner" width="500" /> </p> 
+
+<button class="btn btn-primary">
+     <a href="index.html">Previous</a>
+</button>
+</div>
+<script>
+    
+	// var imgUrl = localStorage.getItem('imgUrl');
+	// var imgObj = localStorage.getItem('imgObj');
+	var newImgUrl = localStorage.getItem('newImgUrl');
+    // let url = URL.createObjectURL(imgObj);
+    // console.log(imgUrl);
+	// console.log(url);
+    bannerImg = document.getElementById('tableBanner');
+    bannerImg.src = newImgUrl;
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- https://codepen.io/mattsince87/pen/yadZXv -->
+

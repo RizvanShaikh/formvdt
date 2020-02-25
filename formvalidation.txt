@@ -1,0 +1,18 @@
+/*************************/
+form-validation-complite with Event Listner
+-form validation
+-add data in table
+-pagination
+-sorting
+
+/*************************/
+
+/*************************/
+form -pagination-edite without Event Listner
+but   objError[key] = str;
+/*************************/
+
+/*************************/
+form -pagination_Backup
+seterror
+/*************************/

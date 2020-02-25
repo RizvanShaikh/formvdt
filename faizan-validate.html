@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Name feild validauion</title>
+</head>
+<body>
+
+	<form>
+		<input type="text" name="name" id="name">
+		<span id="nameError" style="color:red;"></span><br/>
+		<button type="submit" onclick="check()" id="submit">Submit</button>
+	</form>
+</body>
+
+<script type="text/javascript">
+	var isName = false;
+	var isMail = false;
+	function check(){
+		if(isName && isMail){
+			alert('Success');
+		}else{
+			alert('Failed');
+		}
+	}
+
+/* event listener */
+document.getElementById("name").addEventListener('keyup', checkName);
+/* function */
+function checkName(){
+
+   if(this.value.length == 0){
+	   	isName = false;
+   		document.getElementById("nameError").innerHTML = 'Name feild is required'; 
+   }
+   else if(this.value.length <= 3 || this.value.length >= 15){
+	   	isName = false;
+   		document.getElementById("nameError").innerHTML = 'Name must be between 3 to 15 charactor'; 
+   }
+   else if (this.value != ''){
+	  var letters = /^[A-Za-z]+$/;
+      if(this.value.match(letters) == null){
+      	isName = false;
+      	document.getElementById("nameError").innerHTML = 'Name must be alphabets charactor only';
+      }else{
+      	isName = true;
+      	document.getElementById("nameError").innerHTML = '';
+      }
+   }
+   EnableDiableSubmitButton();
+}
+
+function EnableDiableSubmitButton(){
+	bt = document.getElementById('submit');
+	if(isName && isMail)
+		bt.disabled = false;
+	else 
+		bt.disabled = true;
+}
+
+EnableDiableSubmitButton();
+
+</script>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>form validation</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <td>
+                <h3 class="text-center"> Form Validation with Js</h3>
+                <form name="myForm" onsubmit="event.preventDefault();onformSubmit();" autocomplete="off" id="myForm" class="content-box">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="formdesign" id="Name">
+                                <label> Name*: </label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                <span id="nameError" style=" color:#ff0039;"></span>
+                            </div>
+                        </div><!-- form-group -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label> Email*: </label>
+                            <div class="formdesign" id="Email">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email Address">
+                                <span id="emailError" style=" color:#ff0039;"></span>
+                            </div>
+                        </div><!-- form-group -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label> Phone*: </label>
+                            <div class="formdesign" id="Phone">
+                                <input type="phone" name="phone" class="form-control" id="phone" placeholder="Phone Number">
+                                <span id="phoneError" style=" color:#ff0039;"></span>
+                            </div>
+                        </div><!-- form-group -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="formdesign" id="Gender">
+                                <label> Gender*: </label>
+                                <!--  <input type="radio" name="gender" class="form-control" id="gender"> -->
+                                <input type="radio" name="gender" value="male" id="male" onclick="radioValue();" /> Male
+                                <input type="radio" name="gender" value="female" id="female" onclick="radioValue();" /> Female<br>
+                                <span class="formerror" style=" color:#ff0039;"></span>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-action-buttons text-center">
+                            <input type="submit" id="submit" name="" onclick="check();" value="Submit">
+                        </div>
+
+                    </div>
+                </form>
+            </td>
+            <!-- <td> -->
+
+            <table class="list" id="employeeList">
+
+                <thead>
+
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="chkAll" onclick="CheckUncheckAll(this)" />
+                            <input type="button" name="" value="Delete" onclick="chkDeletMaster()" />
+                        </th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact Number</th>
+                        <th>Gender</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+
+        </tr>
+
+    </table>
+<!-- extra -->
+  <!--     <input type="text" name="txt" id="txt">
+      <button onclick= "search()">
+        search
+      </button>
+      <p id= "pgh"></p> -->
+    <!-- pagination in  -->
+
+    <div class="container text-center mt">
+        <!-- <div id="listingTable"></div> -->
+        <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+        <a href="javascript:nextPage()" id="btn_next">Next</a>
+        page: <span id="page"></span>
+    </div>
+
+
+    <script src="js/script.js"></script>
+
+  <!--   <script>
+      var myArray = ["javascript","Node", "ExpressJS"];
+    
+        document.getElementById('pgh').innerHTML = myArray
+      function search() {
+         // debugger
+        var txt =  document.getElementById("txt").value;
+        var index = myArray.indexOf(txt);
+
+        if (index !== -1) {
+           alert("Exist this Value")  
+        } else {
+        alert("Not Exist this Value")
+        }
+
+      }
+
+    </script> -->
+</body>
+
+</html>

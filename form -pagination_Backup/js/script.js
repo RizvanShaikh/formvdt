@@ -1,6 +1,4 @@
 var myArrayObject = [];
-var start = 0;
-var end = 4;
 var alphaExp, emailExp, numericExpression;
 
 function onformSubmit() {
@@ -8,9 +6,20 @@ function onformSubmit() {
     formData = readFormData();
     // if validation is true then
     if (formValidation()) {
+        formData.id = Number(myArrayObject.length)+1;
         insertNewRecord(formData);
-        myArrayObject.push(formData);
+        myArrayObject.push({
+            id: Number(myArrayObject.length)+1,
+            email: formData.email,
+            female: formData.female,
+            male:formData.male,
+            name: formData.name,
+            phone: formData.phone 
+            });
+        updatePaginationFooter()
+        // changePage(1)
     }
+
 }
 var formData1 = {};
 
@@ -25,8 +34,11 @@ function readFormData() {
 }
 
 function insertNewRecord(data) {
-    console.log(data)
+
     if (data.name && data.email && data.phone !== undefined) {
+
+        if(myArrayObject.length < 3){
+
         var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.length)
 
@@ -36,34 +48,70 @@ function insertNewRecord(data) {
         var cell4 = newRow.insertCell(3);
         var cell5 = newRow.insertCell(4);
         var cell6 = newRow.insertCell(5);
+        var cell7 = newRow.insertCell(6);
 
         cell1.innerHTML = '<input type="checkbox" name="" value="" />';
-        cell2.innerHTML = data.name;
-        cell3.innerHTML = data.email;
-        cell4.innerHTML = data.phone;
+        cell2.innerHTML = '#'+(Number(myArrayObject.length)+1);
+        cell3.innerHTML = data.name;
+        cell4.innerHTML = data.email;
+        cell5.innerHTML = data.phone;
 
-        function radioValue() {
+        (function radioValue() {
             if (document.getElementById("male").checked) {
                 var male = document.getElementById("male").value;
-                cell5.innerHTML = data.male;
+                cell6.innerHTML = data.male;
             } else if (document.getElementById("female").checked) {
                 var female = document.getElementById("female").value;
-                cell5.innerHTML = data.female;
+                cell6.innerHTML = data.female;
             }
-        }
-        radioValue()
-        cell6.innerHTML = `<a href="javascript:void(0)" onClick="onDelete(this)">Delete</a>`
-    } else {
+        }())
+        // radioValue()
+        cell7.innerHTML = `<a href="javascript:void(0)" onClick="onDelete(this)">Delete</a>`
+    
+         }
+
+        } else {
         alert("please fill the Form First")
     }
 }
 
+function ReInsertNewRecord(data) {
+
+        var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.length)
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+        var cell7 = newRow.insertCell(6);
+
+        cell1.innerHTML = '<input type="checkbox" name="" value="" />';
+        cell2.innerHTML = '#'+data.id;
+        cell3.innerHTML = data.name;
+        cell4.innerHTML = data.email;
+        cell5.innerHTML = data.phone;
+
+        function radioValue() {
+            if (document.getElementById("male").checked) {
+                var male = document.getElementById("male").value;
+                cell6.innerHTML = data.male;
+            } else if (document.getElementById("female").checked) {
+                var female = document.getElementById("female").value;
+                cell6.innerHTML = data.female;
+            }
+        }
+        radioValue()
+        cell7.innerHTML = `<a href="javascript:void(0)" onClick="onDelete(this)">Delete</a>`
+    
+}
+
 function onDelete(td) {
-    // if(confirm('are you sure you want to delete')){
     var td = event.target.parentNode;
     var tr = td.parentNode;
     var tdtr = tr.parentNode.removeChild(tr);
-    // }
 }
 
 function CheckUncheckAll(chkAll) {
@@ -116,9 +164,7 @@ function inputAlphabet(inputtext, error, id) {
 }
 // Function that checks whether an user entered valid email address or not and displays alert message on wrong email address format.
 function emailValidation(inputtext, error, id) {
-    // var emailExp = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
     var emailExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((([a-zA-Z]+\.)+[a-zA-Z]{2,}))$/igm;
-    // var emailExp= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (emailExp.test(inputtext)) {
         return true;
     } else {
@@ -147,10 +193,6 @@ function phoneValidation(inputtext, error, id) {
 function formValidation() {
     var returnval = true;
     clearerrors();
-    // seterrors("Name", "* User name must be between 4 to 8 characters");
-    // seterrors("Email", "* Email address is not valid");
-    // seterrors("Phone", "* Phone number must be in 10 characters");
-    // Make quick references to our fields.
     var firstName = document.getElementById('name');
     var email = document.getElementById('email');
     var phone = document.getElementById('phone');
@@ -161,15 +203,12 @@ function formValidation() {
         seterror("Phone", "*Phone number is required");
         returnval = false;
     } else if (firstName.value.length <= 3 || firstName.value.length >= 15) {
-        // debugger
         returncheck1 = seterrors("Name", "* User name must be between 4 to 15 characters");
         returnval = false;
     } else if (phone.value.length < 10 || phone.value.length > 10) {
-        // debugger
         returncheck1 = seterrors("Phone", "* Phone number must be in 10 characters");
         returnval = false;
     } else {
-        // debugger;
         returncheck1 = inputAlphabet(firstName.value, "* For your name please use alphabets only", "Name");
         returncheck2 = emailValidation(email.value, "* Please enter a valid email address", "Email");
         returncheck3 = phoneValidation(phone.value, " * Required your valid contact number", "Phone");
@@ -178,32 +217,54 @@ function formValidation() {
     }
     return returnval;
 }
-//---pagination ---
+
 var current_page = 1;
-var records_per_page = 4;
+var records_per_page = 3 ;
+//---pagination ---
+ var start = 0  // 4 * 1
+ var end = 3;
+ var paginatedItems = myArrayObject.slice(start, end);
 
 function prevPage() {
     if (current_page > 1) {
-        current_page--;
-        changePage(current_page);
+        changePage(current_page--);
     }
 }
 
 function nextPage() {
     if (current_page < numPages()) {
-        current_page++;
-        changePage(current_page);
+        changePage(current_page++);
     }
 }
 
+var page_span = document.getElementById("page");
+page_span.innerHTML = 1 + "/" + 1
+
+function updatePaginationFooter(){
+  if (page < 1) page = current_page;
+  if (page > numPages()) page = numPages();
+  page_span.innerHTML = current_page + "/" + numPages()
+}
+
 function changePage(page) {
+
     var btn_next = document.getElementById("btn_next");
     var btn_prev = document.getElementById("btn_prev");
-    var page_span = document.getElementById("page");
-    // Validate page
-    if (page < 1) page = 1;
-    if (page > numPages()) page = numPages();
-    page_span.innerHTML = page + "/" + numPages();
+    var paginatedItems = myArrayObject.slice(((current_page-1)*records_per_page), numRecords());
+    paginatedItems = paginatedItems.slice(0,records_per_page);
+    resetTable();
+    for (var i = 0; i<paginatedItems.length; i++) {
+       ReInsertNewRecord(paginatedItems[i])
+    } 
+    updatePaginationFooter();
+}
+
+function resetTable(){
+ document.getElementsByTagName('tbody')[1].innerHTML = "";
+}
+
+function numRecords() {
+    return Math.ceil(myArrayObject.length);
 }
 
 function numPages() {
@@ -253,4 +314,4 @@ function sortTable(c) {
             switching = true;
         }
     }
-} //232
+}

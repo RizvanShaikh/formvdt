@@ -48,15 +48,14 @@
                             <div class="formdesign" id="Gender">
                                 <label> Gender*: </label>
                                 <!--  <input type="radio" name="gender" class="form-control" id="gender"> -->
-                                <input type="radio" name="gender" value="male" id="male" onclick="radioValue();" /> Male
-                                <input type="radio" name="gender" value="female" id="female" onclick="radioValue();" /> Female<br>
+                                <input type="radio" name="gender" value="male" id="male"  /> Male
+                                <input type="radio" name="gender" value="female" id="female"  /> Female<br>
                                 <span class="formerror" style=" color:#ff0039;"></span>
                             </div>
                         </div><!-- form-group -->
 
                         <div class="form-action-buttons text-center">
                             <input type="submit" name="" value="Submit">
-
                         </div>
 
                     </div>
@@ -73,6 +72,7 @@
                             <input type="checkbox" id="chkAll" onclick="CheckUncheckAll(this)" />
                             <input type="button" name="" value="Delete" onclick="chkDeletMaster()" />
                         </th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact Number</th>
@@ -96,9 +96,9 @@
     <!-- pagination in  -->
 
     <div class="container text-center mt">
-        <!-- <div id="listingTable"></div> -->
         <a href="javascript:prevPage()" id="btn_prev">Prev</a>
         <a href="javascript:nextPage()" id="btn_next">Next</a>
+       
         page: <span id="page"></span>
     </div>
 
